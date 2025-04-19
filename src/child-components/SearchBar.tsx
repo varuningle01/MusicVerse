@@ -7,7 +7,7 @@ const SearchBar = () => {
       <CiSearch size={25} className="text-gray-400" />
       <input
         type="search"
-        className="w-full appearance-none outline-none"
+        className="w-full appearance-none outline-none placeholder:text-gray-400"
         placeholder="Search artist, title, album"
       />
     </div>
