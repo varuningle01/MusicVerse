@@ -31,9 +31,9 @@ const RecommendedSection = () => {
   ];
   return (
     <div>
-      <div className="flex flex-row items-start gap-x-4">
-        <p className="text-3xl flex-1">Recommended</p>
-        <p className="text-xl text-purple-400">View All</p>
+      <div className="flex flex-row items-center">
+        <p className="text-xl flex-1">Recommended</p>
+        <p className="text-xs text-purple-400">View All</p>
       </div>
       <div className="flex flex-row gap-x-3">
         {CardList.map((item, index) => {

@@ -8,18 +8,20 @@ import Player from "../child-components/Player";
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen mx-auto border-2 grid grid-cols-12">
-      <div className="col-span-2 border-2 border-purple-500 p-4">
+    <div className="h-screen mx-auto grid grid-cols-1 md:grid-cols-12">
+      <div className="md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0">
         <SidePanel />
       </div>
-      <div className="col-span-10 border-2 p-4 ">
-        <div className="flex flex-row items-start gap-x-4">
+      <div className="md:col-span-10 col-span-1 flex flex-col h-screen">
+        <div className="flex flex-row items-start gap-x-4 mx-4 mt-4">
           <SearchBar />
           <Avatar />
         </div>
-        <div className="border-2 border-purple-400 p-2">
+        <div className="p-2 overflow-auto scroll-smooth flex-1 appearance-none m-4 mt-0">
           <RecommendedSection />
           <TopChartThisWeekSection />
+        </div>
+        <div className="sticky bottom-0 z-50 bg-white shadow-md p-3">
           <Player />
         </div>
       </div>
