@@ -20,7 +20,7 @@ export const SongsList = [
   {
     id: nanoid(),
     cover: "./assets/Crew.jpg",
-    url: "./public/naina.m4a",
+    url: "./naina.m4a",
     title: "Naina",
     artist: "Diljit Dosanjh",
     album: "Crew",
