@@ -4,7 +4,7 @@ export const SongsList = [
   {
     id: nanoid(),
     cover: "../../src/assets/choo lo.jpg",
-    url: "https://aac.saavncdn.com/111/d4df22cec4d008f0a0b55f5b3ce6bf66_160.mp4",
+    url: "../../public/The Local Train - Aaoge Tum Kabhi (Official).mp3",
     title: "Aaoge Tum Kabhi",
     artist: "The Local Train",
     album: "Aalas ka pedh",
@@ -12,7 +12,7 @@ export const SongsList = [
   {
     id: nanoid(),
     cover: "../../src/assets/Kesariya.jpg",
-    url: "https://aac.saavncdn.com/871/c2febd353f3a076a406fa37510f31f9f_160.mp4",
+    url: "../../public/kesariya.m4a",
     title: "Kesariya",
     artist: "Arijit Singh",
     album: "Brahmastra",
@@ -20,7 +20,7 @@ export const SongsList = [
   {
     id: nanoid(),
     cover: "../../src/assets/Crew.jpg",
-    url: "https://aac.saavncdn.com/689/8d3652ec569abd891db7782f2c7164fd_160.mp4",
+    url: "../../public/naina.m4a",
     title: "Naina",
     artist: "Diljit Dosanjh",
     album: "Crew",
@@ -28,7 +28,7 @@ export const SongsList = [
   {
     id: nanoid(),
     cover: "../../src/assets/choo lo.jpg",
-    url: "https://aac.saavncdn.com/111/09c5dba8ec03665a9a679e19338917a6_160.mp4",
+    url: "../../public/The Local Train - Aalas Ka Pedh - Choo Lo (Official Audio).mp3",
     title: "Choo lo",
     artist: "The Local Train",
     album: "Aalas ka pedh",
@@ -36,7 +36,7 @@ export const SongsList = [
   {
     id: nanoid(),
     cover: "../../src/assets/Muskurahat.jpg",
-    url: "https://aac.saavncdn.com/147/60c4a680e0d7ab281d22a87fe533a385_160.mp4",
+    url: "../../public/muskhurahat.m4a",
     title: "Muskurahat",
     artist: "Mitraz",
     album: "",
