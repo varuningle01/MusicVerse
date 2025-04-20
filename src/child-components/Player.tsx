@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { IoHeartOutline } from "react-icons/io5";
 import { CiVolumeHigh } from "react-icons/ci";
 import { BsShuffle } from "react-icons/bs";
@@ -17,7 +17,7 @@ import {
   seek,
   setCurrentTime,
   setDuration,
-} from "../features/player/PlayerSlice";
+} from "../features/player/playerSlice";
 
 const Player = () => {
   const audioRef = useRef<HTMLAudioElement>(null);

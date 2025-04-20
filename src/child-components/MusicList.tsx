@@ -1,5 +1,3 @@
-import React from "react";
-
 type musicListProps = {
   id: number;
   musicName: string;
@@ -36,7 +34,7 @@ const MusicList = ({ item }: CategoryMusicListProps) => {
               <div className="text-2xl p-3">{item.id}</div>
               <div>
                 <span className="text-sm mt-3">{item.musicName}</span>
-                <p className="flex text-sm text-gray-600 gap-x-2 text-xs text-gray-400">
+                <p className="flex gap-x-2 text-xs text-gray-400">
                   <span> {item.artistName}</span>
                   <span> {item.musicLength}</span>
                 </p>

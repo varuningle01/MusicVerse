@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "../child-components/Card";
 import { SongsList } from "../data/Songs";
 

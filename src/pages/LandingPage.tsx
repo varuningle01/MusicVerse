@@ -1,4 +1,3 @@
-import React from "react";
 import SearchBar from "../child-components/SearchBar";
 import SidePanel from "../components/SidePanel";
 import Avatar from "../child-components/Avatar";

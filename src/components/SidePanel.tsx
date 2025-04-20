@@ -1,4 +1,3 @@
-import React from "react";
 import MusicVerseLogo from "../assets/musicverse-logo.svg";
 
 const SidePanel = () => {
