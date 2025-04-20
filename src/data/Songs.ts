@@ -3,8 +3,8 @@ import { nanoid } from "@reduxjs/toolkit";
 export const SongsList = [
   {
     id: nanoid(),
-    cover: "../../src/assets/choo lo.jpg",
-    url: "../../public/The Local Train - Aaoge Tum Kabhi (Official).mp3",
+    cover: "../assets/choo lo.jpg",
+    url: "./The Local Train - Aaoge Tum Kabhi (Official).mp3",
     title: "Aaoge Tum Kabhi",
     artist: "The Local Train",
     album: "Aalas ka pedh",
