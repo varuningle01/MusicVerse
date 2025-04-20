@@ -77,8 +77,8 @@ const TopChartThisWeekSection = () => {
   return (
     <div>
       <div className="flex flex-row items-start gap-x-4">
-        <p className="text-3xl flex-1">Top Chart This Week</p>
-        <p className="text-xl text-purple-400">View All</p>
+        <p className="text-xl flex-1">Top Chart This Week</p>
+        <p className="text-xs text-purple-400">View All</p>
       </div>
       <div className="grid grid-cols-12">
         {itemList.map((item) => {

@@ -17,14 +17,16 @@ type CategoryMusicListProps = {
 const MusicList = ({ item }: CategoryMusicListProps) => {
   return (
     <div className="grid grid-cols-12 border-2 border-green-400 gap-x-10">
-      <div className="relative w-64 rounded-lg overflow-hidden col-span-5">
+      <div className="relative w-50 rounded-lg overflow-hidden col-span-5">
         <img
-          src="https://via.placeholder.com/256x160"
+          src="https://placehold.jp/150x150.png"
           alt="Music"
           className="w-full h-full"
         />
-        <div className="absolute inset-0 bg-amber-100 bg-opacity-10 flex items-center justify-center">
-          <p className="text-black text-xl font-semibold">{item.category}</p>
+        <div className="absolute inset-0 flex items-end justify-center">
+          <p className="text-black text-xl font-semibold mb-10">
+            {item.category}
+          </p>
         </div>
       </div>
       <div className="col-span-7">
@@ -33,8 +35,8 @@ const MusicList = ({ item }: CategoryMusicListProps) => {
             <div className="flex flex-row items-center">
               <div className="text-2xl p-3">{item.id}</div>
               <div>
-                {item.musicName}
-                <p className="flex text-sm text-gray-600 gap-x-2">
+                <span className="text-sm mt-3">{item.musicName}</span>
+                <p className="flex text-sm text-gray-600 gap-x-2 text-xs text-gray-400">
                   <span> {item.artistName}</span>
                   <span> {item.musicLength}</span>
                 </p>
