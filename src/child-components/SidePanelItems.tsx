@@ -1,5 +1,4 @@
 const SidePanelItems = (props: any) => {
-  console.log(props);
   return (
     <div>
       <p className="text-base font-bold mt-4 text-gray-500">
