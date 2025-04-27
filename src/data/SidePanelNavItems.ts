@@ -1,7 +1,7 @@
 import { IoMdHome } from "react-icons/io";
 import { FaMicrophone } from "react-icons/fa6";
 import { MdAlbum } from "react-icons/md";
-import { FaBookOpen, FaMusic } from "react-icons/fa";
+import { FaMusic } from "react-icons/fa";
 import { LuClock3 } from "react-icons/lu";
 import { IoHeart } from "react-icons/io5";
 import { IoIosSettings } from "react-icons/io";
