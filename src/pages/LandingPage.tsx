@@ -23,7 +23,10 @@ const LandingPage = () => {
           <TopChartThisWeekSection />
         </div>
         {currentTrack && (
-          <div className="sticky bottom-0 z-50 backdrop-blur-md shadow-xl p-3">
+          <div
+            className="w-full flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 
+                bg-white/10 backdrop-blur-lg shadow-lg border border-white/20 rounded-xl p-3"
+          >
             <Player />
           </div>
         )}

@@ -93,7 +93,6 @@ const playerSlice = createSlice({
       state.currentTrack = state.queue[state.currentIndex];
     },
     setQueue: (state, action) => {
-      console.log("payload", action.payload);
       state.queue = action.payload;
       state.currentIndex = action.payload.startIndex || 0;
       state.currentTrack = state.queue[state.currentIndex];

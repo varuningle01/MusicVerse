@@ -1,15 +1,14 @@
 import { useEffect, useRef } from "react";
-import { IoHeartOutline } from "react-icons/io5";
-import { CiVolumeHigh } from "react-icons/ci";
-import { BsShuffle } from "react-icons/bs";
 import {
-  MdSkipPrevious,
-  MdOutlinePlayCircleFilled,
-  MdSkipNext,
-  MdOutlineRepeatOne,
-  MdOutlinePauseCircleFilled,
-} from "react-icons/md";
-import { formatTime } from "../formatting";
+  IoHeartOutline,
+  IoShuffleOutline,
+  IoPlayBackSharp,
+  IoPlayForwardSharp,
+  IoRepeatOutline,
+  IoPlaySharp,
+  IoPauseSharp,
+  IoVolumeHighOutline,
+} from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import {
   pause,
@@ -22,10 +21,10 @@ import {
   toggleRepeat,
   toggleShuffle,
 } from "../features/player/playerSlice";
+import { formatTime } from "../formatting";
 
 const Player = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-
   const { currentTrack, isPlaying, progress, duration, shuffle, repeat } =
     useSelector((state: any) => state.player);
   const dispatch = useDispatch();
@@ -54,11 +53,7 @@ const Player = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (isPlaying) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
+    isPlaying ? audio.play() : audio.pause();
   }, [isPlaying]);
 
   const togglePlay = () => {
@@ -73,97 +68,98 @@ const Player = () => {
     }
   };
 
-  const handleShuffle = () => {
-    dispatch(toggleShuffle());
-  };
-
-  const handleRepeat = () => {
-    dispatch(toggleRepeat());
-  };
-
-  const handleNext = () => {
-    dispatch(playNextTrack());
-  };
-
-  const handlePrevious = () => {
-    dispatch(playPreviousTrack());
-  };
+  const handleShuffle = () => dispatch(toggleShuffle());
+  const handleRepeat = () => dispatch(toggleRepeat());
+  const handleNext = () => dispatch(playNextTrack());
+  const handlePrevious = () => dispatch(playPreviousTrack());
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-x-4 justify-around items-center">
+    <div className="w-full bg-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+      {/* Audio element */}
       <audio ref={audioRef} src={currentTrack?.url ?? ""}></audio>
-      <div className="mb-4 items-center flex gap-x-10 justify-evenly ms-20 md:col-span-2 md:ms-0">
-        <div>
-          <img
-            src={currentTrack?.cover ?? "https://placehold.jp/150x150.png"}
-            alt="Music"
-            className="w-16 h-16 rounded-2xl object-cover"
-          ></img>
-        </div>
-        <div>
-          <p className="text-sm mt-3">{currentTrack?.title}</p>
-          <p className="text-xs text-gray-400">{currentTrack?.artist}</p>
+
+      {/* Album Info */}
+      <div className="flex items-center justify-center gap-3 md:gap-4 w-full md:w-auto">
+        <img
+          src={currentTrack?.cover ?? "https://placehold.jp/150x150.png"}
+          alt="Music"
+          className="w-12 h-12 md:w-16 md:h-16 rounded-2xl object-cover"
+        />
+        <div className="flex flex-col">
+          <p className="text-sm md:text-base font-medium">
+            {currentTrack?.title}
+          </p>
+          <p className="text-xs md:text-sm text-gray-400">
+            {currentTrack?.artist}
+          </p>
         </div>
       </div>
-      <div className="col-span-8 justify-center flex flex-col items-center gap-y-6">
-        <div className="flex items-center gap-x-8">
-          <BsShuffle
-            size={25}
+
+      {/* Controls */}
+      <div className="flex flex-col md:flex-1 items-center w-full">
+        {/* Buttons */}
+        <div className="flex items-center justify-center gap-4 md:gap-6 mb-2">
+          <IoShuffleOutline
+            size={22}
             onClick={handleShuffle}
-            className={`cursor-pointer hover:scale-110 transition-transform ${
-              shuffle ? "text-black scale-125" : "text-gray-400"
+            className={`cursor-pointer transition-transform ${
+              shuffle ? "text-black scale-110" : "text-gray-400"
             } hover:scale-110`}
           />
-          <MdSkipPrevious
-            size={30}
+          <IoPlayBackSharp
+            size={28}
             onClick={handlePrevious}
-            className="cursor-pointer hover:scale-110 transition-all"
+            className="cursor-pointer hover:scale-110 transition-transform"
           />
           {isPlaying ? (
-            <MdOutlinePauseCircleFilled
-              size={40}
+            <IoPauseSharp
+              size={34}
               onClick={togglePlay}
               className="cursor-pointer"
             />
           ) : (
-            <MdOutlinePlayCircleFilled
-              size={40}
+            <IoPlaySharp
+              size={34}
               onClick={togglePlay}
               className="cursor-pointer"
             />
           )}
-          <MdSkipNext
-            size={30}
+          <IoPlayForwardSharp
+            size={28}
             onClick={handleNext}
-            className="cursor-pointer hover:scale-110 transition-all"
+            className="cursor-pointer hover:scale-110 transition-transform"
           />
-          <MdOutlineRepeatOne
-            size={30}
+          <IoRepeatOutline
+            size={22}
             onClick={handleRepeat}
-            className={`cursor-pointer hover:scale-110 transition-transform ${
-              repeat ? "text-black scale-125" : "text-gray-400"
+            className={`cursor-pointer transition-transform ${
+              repeat ? "text-black scale-110" : "text-gray-400"
             } hover:scale-110`}
           />
         </div>
-        <div className="w-full flex flex-row justify-evenly items-center gap-x-4">
-          <span>{formatTime(progress)}</span>
+
+        {/* Progress Bar */}
+        <div className="flex items-center gap-2 w-full px-2 md:px-10">
+          <span className="text-xs md:text-sm">{formatTime(progress)}</span>
           <input
             type="range"
             min={0}
             max={duration}
             value={progress}
             onChange={handleSeek}
-            className="w-full h-2 bg-gray-200 rounded-lg cursor-pointer"
+            className="flex-1 h-2 bg-gray-200 rounded-lg cursor-pointer accent-violet-500"
           />
-          <span>{formatTime(duration)}</span>
+          <span className="text-xs md:text-sm">{formatTime(duration)}</span>
         </div>
       </div>
-      <div className="col-span-2 flex gap-x-4 items-center">
-        <IoHeartOutline size={35} />
-        <CiVolumeHigh size={35} />
+
+      {/* Volume & Like */}
+      <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto">
+        <IoHeartOutline size={22} className="cursor-pointer" />
+        <IoVolumeHighOutline size={22} />
         <input
           type="range"
-          className="w-full h-2 bg-gray-200 rounded-lg cursor-pointer"
+          className="w-full md:w-24 h-2 bg-gray-200 rounded-lg cursor-pointer accent-violet-500"
         />
       </div>
     </div>

@@ -11,7 +11,7 @@ const MusicListItem = ({
     <div className="flex flex-row items-center group cursor-pointer">
       <div className="text-2xl p-3 relative w-10 h-10 flex items-center justify-center">
         <span className="group-hover:hidden">{id}</span>
-        <FaPlay className="hidden group-hover:block text-green-500" />
+        <FaPlay className="hidden group-hover:block text-violet-500 text-lg" />
       </div>
 
       <div>
