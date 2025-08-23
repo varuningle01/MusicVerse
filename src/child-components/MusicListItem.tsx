@@ -1,4 +1,3 @@
-import React from "react";
 import { musicListProps } from "./MusicList";
 import { FaPlay } from "react-icons/fa";
 
