@@ -1,4 +1,6 @@
-type musicListProps = {
+import MusicListItem from "./MusicListItem";
+
+export type musicListProps = {
   id: number;
   musicName: string;
   artistName: string;
@@ -8,40 +10,28 @@ type musicListProps = {
 type CategoryMusicListProps = {
   item: {
     category: string;
+    categoryCover: string;
     musicList: musicListProps[];
   };
 };
 
 const MusicList = ({ item }: CategoryMusicListProps) => {
   return (
-    <div className="grid grid-cols-12 border-2 border-green-400 gap-x-10">
-      <div className="relative w-50 rounded-lg overflow-hidden col-span-5">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-x-10 p-4 rounded-lg">
+      {/* Image Section */}
+      <div className="relative rounded-lg overflow-hidden md:col-span-5">
         <img
-          src="https://placehold.jp/150x150.png"
+          src={item.categoryCover}
           alt="Music"
-          className="w-full h-full"
+          className="w-full h-48 md:h-64 object-cover"
         />
-        <div className="absolute inset-0 flex items-end justify-center">
-          <p className="text-black text-xl font-semibold mb-10">
-            {item.category}
-          </p>
-        </div>
       </div>
-      <div className="col-span-7">
-        {item.musicList.map((item) => {
-          return (
-            <div className="flex flex-row items-center">
-              <div className="text-2xl p-3">{item.id}</div>
-              <div>
-                <span className="text-sm mt-3">{item.musicName}</span>
-                <p className="flex gap-x-2 text-xs text-gray-400">
-                  <span> {item.artistName}</span>
-                  <span> {item.musicLength}</span>
-                </p>
-              </div>
-            </div>
-          );
-        })}
+
+      {/* List Section */}
+      <div className="md:col-span-7 flex flex-col justify-center gap-y-3">
+        {item.musicList.map((music) => (
+          <MusicListItem key={music.id} {...music} />
+        ))}
       </div>
     </div>
   );

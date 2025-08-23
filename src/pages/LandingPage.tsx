@@ -23,7 +23,7 @@ const LandingPage = () => {
           <TopChartThisWeekSection />
         </div>
         {currentTrack && (
-          <div className="sticky bottom-0 z-50 bg-white shadow-md p-3">
+          <div className="sticky bottom-0 z-50 backdrop-blur-md shadow-xl p-3">
             <Player />
           </div>
         )}

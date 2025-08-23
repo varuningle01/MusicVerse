@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export type Track = {
   id: string;
@@ -10,6 +10,10 @@ export type Track = {
 };
 
 export type PlayerState = {
+  queue: [];
+  currentIndex: number;
+  shuffle: boolean;
+  repeat: boolean;
   isPlaying: boolean;
   currentTrack: Track | null;
   progress: number; // in seconds
@@ -19,6 +23,10 @@ export type PlayerState = {
 };
 
 const initialState: PlayerState = {
+  queue: [],
+  currentIndex: 0,
+  shuffle: false,
+  repeat: false,
   isPlaying: false,
   currentTrack: null,
   progress: 0,
@@ -63,6 +71,33 @@ const playerSlice = createSlice({
     setCurrentTime: (state, action) => {
       state.progress = action.payload;
     },
+    toggleShuffle: (state) => {
+      state.shuffle = !state.shuffle;
+    },
+    toggleRepeat: (state) => {
+      state.repeat = !state.repeat;
+    },
+    playNextTrack: (state) => {
+      if (state.queue.length === 0) return;
+      if (state.shuffle) {
+        state.currentIndex = Math.floor(Math.random() * state.queue.length);
+      } else {
+        state.currentIndex = (state.currentIndex + 1) % state.queue.length;
+      }
+      state.currentTrack = state.queue[state.currentIndex];
+    },
+    playPreviousTrack: (state) => {
+      if (state.queue.length === 0) return;
+      state.currentIndex =
+        (state.currentIndex - 1 + state.queue.length) % state.queue.length;
+      state.currentTrack = state.queue[state.currentIndex];
+    },
+    setQueue: (state, action) => {
+      console.log("payload", action.payload);
+      state.queue = action.payload;
+      state.currentIndex = action.payload.startIndex || 0;
+      state.currentTrack = state.queue[state.currentIndex];
+    },
   },
 });
 
@@ -76,6 +111,11 @@ export const {
   resetPlayer,
   setDuration,
   setCurrentTime,
+  toggleRepeat,
+  toggleShuffle,
+  playNextTrack,
+  playPreviousTrack,
+  setQueue,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

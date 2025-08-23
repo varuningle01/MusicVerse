@@ -3,7 +3,8 @@ import MusicList from "../child-components/MusicList";
 const TopChartThisWeekSection = () => {
   const itemList = [
     {
-      category: "100 Top Hits",
+      category: "Global Top Hits",
+      categoryCover: "./assets/Global Top Hits Playlist Cover.png",
       musicList: [
         {
           id: 1,
@@ -38,7 +39,8 @@ const TopChartThisWeekSection = () => {
       ],
     },
     {
-      category: "100 Top Hits",
+      category: "Punjabi Top Hits",
+      categoryCover: "./assets/Punjabi Top Hits Playlist Cover.png",
       musicList: [
         {
           id: 1,

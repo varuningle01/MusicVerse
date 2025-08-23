@@ -14,17 +14,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   pause,
   play,
+  playNextTrack,
+  playPreviousTrack,
   seek,
   setCurrentTime,
   setDuration,
+  toggleRepeat,
+  toggleShuffle,
 } from "../features/player/playerSlice";
 
 const Player = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const { currentTrack, isPlaying, progress, duration } = useSelector(
-    (state: any) => state.player
-  );
+  const { currentTrack, isPlaying, progress, duration, shuffle, repeat } =
+    useSelector((state: any) => state.player);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,6 +73,22 @@ const Player = () => {
     }
   };
 
+  const handleShuffle = () => {
+    dispatch(toggleShuffle());
+  };
+
+  const handleRepeat = () => {
+    dispatch(toggleRepeat());
+  };
+
+  const handleNext = () => {
+    dispatch(playNextTrack());
+  };
+
+  const handlePrevious = () => {
+    dispatch(playPreviousTrack());
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-x-4 justify-around items-center">
       <audio ref={audioRef} src={currentTrack?.url ?? ""}></audio>
@@ -88,8 +107,18 @@ const Player = () => {
       </div>
       <div className="col-span-8 justify-center flex flex-col items-center gap-y-6">
         <div className="flex items-center gap-x-8">
-          <BsShuffle size={25} />
-          <MdSkipPrevious size={30} />
+          <BsShuffle
+            size={25}
+            onClick={handleShuffle}
+            className={`cursor-pointer hover:scale-110 transition-transform ${
+              shuffle ? "text-black scale-125" : "text-gray-400"
+            } hover:scale-110`}
+          />
+          <MdSkipPrevious
+            size={30}
+            onClick={handlePrevious}
+            className="cursor-pointer hover:scale-110 transition-all"
+          />
           {isPlaying ? (
             <MdOutlinePauseCircleFilled
               size={40}
@@ -103,8 +132,18 @@ const Player = () => {
               className="cursor-pointer"
             />
           )}
-          <MdSkipNext size={30} />
-          <MdOutlineRepeatOne size={30} />
+          <MdSkipNext
+            size={30}
+            onClick={handleNext}
+            className="cursor-pointer hover:scale-110 transition-all"
+          />
+          <MdOutlineRepeatOne
+            size={30}
+            onClick={handleRepeat}
+            className={`cursor-pointer hover:scale-110 transition-transform ${
+              repeat ? "text-black scale-125" : "text-gray-400"
+            } hover:scale-110`}
+          />
         </div>
         <div className="w-full flex flex-row justify-evenly items-center gap-x-4">
           <span>{formatTime(progress)}</span>

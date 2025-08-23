@@ -1,6 +1,12 @@
 import { MdOutlinePlayCircleFilled } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { play, setCurrentTrack, Track } from "../features/player/playerSlice";
+import {
+  play,
+  setCurrentTrack,
+  setQueue,
+  Track,
+} from "../features/player/playerSlice";
+import { SongsList } from "../data/Songs";
 
 const Card = (props: Track) => {
   const dispatch = useDispatch();
@@ -19,10 +25,13 @@ const Card = (props: Track) => {
             size={50}
             onClick={() => {
               if (!currentTrack) {
+                dispatch(setQueue(SongsList));
                 dispatch(setCurrentTrack(props));
               } else if (currentTrack.id !== props.id) {
                 dispatch(setCurrentTrack(props));
               } else {
+                console.log("Hitted");
+                dispatch(setQueue(SongsList));
                 dispatch(play());
               }
             }}
