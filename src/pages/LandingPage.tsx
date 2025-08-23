@@ -24,7 +24,7 @@ const LandingPage = () => {
         </div>
         {currentTrack && (
           <div
-            className="w-full flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 
+            className="w-full fixed bottom-0 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 
                 bg-white/10 backdrop-blur-lg shadow-lg border border-white/20 rounded-xl p-3"
           >
             <Player />

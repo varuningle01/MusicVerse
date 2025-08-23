@@ -74,7 +74,7 @@ const Player = () => {
   const handlePrevious = () => dispatch(playPreviousTrack());
 
   return (
-    <div className="w-full bg-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+    <div className="w-full bg-transparent flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
       {/* Audio element */}
       <audio ref={audioRef} src={currentTrack?.url ?? ""}></audio>
 
