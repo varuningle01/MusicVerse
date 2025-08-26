@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   IoHeartOutline,
   IoShuffleOutline,
@@ -8,6 +8,7 @@ import {
   IoPlaySharp,
   IoPauseSharp,
   IoVolumeHighOutline,
+  IoVolumeMuteOutline,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,20 +30,42 @@ const Player = () => {
     useSelector((state: any) => state.player);
   const dispatch = useDispatch();
 
+  // 🔊 local state for volume
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
+  const [lastVolume, setLastVolume] = useState(1);
+
+  // ---- EVENT LISTENERS ----
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+
     const updateTime = () => dispatch(setCurrentTime(audio.currentTime));
     const setMeta = () => dispatch(setDuration(audio.duration));
+
+    const handleEnded = () => {
+      if (repeat) {
+        // repeat same song
+        audio.currentTime = 0;
+        audio.play();
+      } else {
+        //  go to next
+        dispatch(playNextTrack());
+      }
+    };
+
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", setMeta);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("loadedmetadata", setMeta);
+      audio.removeEventListener("ended", handleEnded);
     };
-  }, [currentTrack, isPlaying]);
+  }, [currentTrack, isPlaying, repeat, dispatch]);
 
+  // play when new track is selected
   useEffect(() => {
     if (currentTrack && audioRef.current) {
       audioRef.current.play();
@@ -50,12 +73,21 @@ const Player = () => {
     }
   }, [currentTrack]);
 
+  // toggle play/pause
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
     isPlaying ? audio.play() : audio.pause();
   }, [isPlaying]);
 
+  // 🔊 update volume/mute
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : volume;
+    }
+  }, [volume, isMuted]);
+
+  // ---- HANDLERS ----
   const togglePlay = () => {
     isPlaying ? dispatch(pause()) : dispatch(play());
   };
@@ -65,6 +97,29 @@ const Player = () => {
     if (audioRef.current) {
       audioRef.current.currentTime = time;
       dispatch(seek(time));
+    }
+  };
+
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+
+    if (newVolume > 0) {
+      setIsMuted(false);
+      setLastVolume(newVolume);
+    }
+    if (newVolume === 0) {
+      setIsMuted(true);
+    }
+  };
+
+  const toggleMute = () => {
+    if (isMuted) {
+      setIsMuted(false);
+      setVolume(lastVolume || 1);
+    } else {
+      setLastVolume(volume);
+      setIsMuted(true);
     }
   };
 
@@ -97,7 +152,6 @@ const Player = () => {
 
       {/* Controls */}
       <div className="flex flex-col md:flex-1 items-center w-full">
-        {/* Buttons */}
         <div className="flex items-center justify-center gap-4 md:gap-6 mb-2">
           <IoShuffleOutline
             size={22}
@@ -156,9 +210,28 @@ const Player = () => {
       {/* Volume & Like */}
       <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto">
         <IoHeartOutline size={22} className="cursor-pointer" />
-        <IoVolumeHighOutline size={22} />
+
+        {isMuted || volume === 0 ? (
+          <IoVolumeMuteOutline
+            size={22}
+            className="cursor-pointer"
+            onClick={toggleMute}
+          />
+        ) : (
+          <IoVolumeHighOutline
+            size={22}
+            className="cursor-pointer"
+            onClick={toggleMute}
+          />
+        )}
+
         <input
           type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={isMuted ? 0 : volume}
+          onChange={handleVolume}
           className="w-full md:w-24 h-2 bg-gray-200 rounded-lg cursor-pointer accent-violet-500"
         />
       </div>

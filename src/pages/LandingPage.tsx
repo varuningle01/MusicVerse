@@ -5,6 +5,7 @@ import RecommendedSection from "../components/RecommendedSection";
 import TopChartThisWeekSection from "../components/TopChartThisWeekSection";
 import Player from "../child-components/Player";
 import { useSelector } from "react-redux";
+import TopAlbum from "../components/TopAlbum";
 
 const LandingPage = () => {
   const { currentTrack } = useSelector((state: any) => state.player);
@@ -18,9 +19,16 @@ const LandingPage = () => {
           <SearchBar />
           <Avatar />
         </div>
-        <div className="mx-4 overflow-auto scrollbar-hide scroll-smooth flex-1 appearance-none pt-0">
+        <div
+          className={
+            currentTrack
+              ? `mx-4 overflow-auto scrollbar-hide scroll-smooth flex-1 appearance-none pt-0 pb-30`
+              : `mx-4 overflow-auto scrollbar-hide scroll-smooth flex-1 appearance-none pt-0`
+          }
+        >
           <RecommendedSection />
           <TopChartThisWeekSection />
+          <TopAlbum />
         </div>
         {currentTrack && (
           <div
