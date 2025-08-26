@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "../features/dashboard/dashboardSlice";
 
 const SidePanelItems = (props: any) => {
   const dispatch = useDispatch();
+  const { currentTab } = useSelector((state: any) => state.dashboard);
   const handleCurrentTab = (tab: string) => {
     const tabName = tab.toUpperCase();
     dispatch(setCurrentTab(tabName));
@@ -13,7 +14,11 @@ const SidePanelItems = (props: any) => {
       {props?.items?.map((element: any) => {
         return (
           <button
-            className="items-center gap-x-2 mt-2 gap-2 px-8 py-2 w-full cursor-pointer text-gray-500 rounded-xl transition-colors duration-300 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-violet-500 hover:text-white"
+            className={
+              currentTab === element.title.toUpperCase()
+                ? "items-center gap-x-2 mt-2 gap-2 px-8 py-2 w-full cursor-pointer text-gray-500 rounded-xl transition-colors bg-gradient-to-r from-cyan-500 to-violet-500 text-white"
+                : "items-center gap-x-2 mt-2 gap-2 px-8 py-2 w-full cursor-pointer text-gray-500 rounded-xl transition-colors duration-300 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-violet-500 hover:text-white"
+            }
             onClick={() => handleCurrentTab(element.title)}
           >
             <div className="flex items-center gap-x-4">
