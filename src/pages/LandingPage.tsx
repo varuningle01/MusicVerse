@@ -1,34 +1,48 @@
+import { useMemo } from "react";
 import SearchBar from "../child-components/SearchBar";
 import SidePanel from "../components/SidePanel";
 import Avatar from "../child-components/Avatar";
-import RecommendedSection from "../components/RecommendedSection";
-import TopChartThisWeekSection from "../components/TopChartThisWeekSection";
 import Player from "../child-components/Player";
 import { useSelector } from "react-redux";
-import TopAlbum from "../components/TopAlbum";
+import { TAB_LIST } from "../common/devConstants";
+import Home from "../pages/Home";
+import Settings from "./Settings";
 
 const LandingPage = () => {
   const { currentTrack } = useSelector((state: any) => state.player);
+  const { currentTab } = useSelector((state: any) => state.dashboard);
+
+  const TabConfig: Record<string, React.FC> = {
+    [TAB_LIST.HOME]: Home,
+    [TAB_LIST.SETTINGS]: Settings,
+  };
+
+  const CurrentComponent = useMemo(() => TabConfig[currentTab], [currentTab]);
+
   return (
     <div className="h-screen mx-auto grid grid-cols-1 md:grid-cols-12">
-      <div className="md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0">
+      <div
+        className={
+          currentTrack
+            ? `overflow-auto no-scrollbar scroll-smooth md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0 pb-30`
+            : `md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0`
+        }
+      >
         <SidePanel />
       </div>
       <div className="md:col-span-10 col-span-1 flex flex-col h-screen">
-        <div className="flex flex-row items-center gap-x-4 px-4 pt-4">
+        <div className="flex flex-row items-center gap-x-4 px-4 pt-4 pb-2">
           <SearchBar />
           <Avatar />
         </div>
         <div
           className={
             currentTrack
-              ? `mx-4 overflow-auto scrollbar-hide scroll-smooth flex-1 appearance-none pt-0 pb-30`
-              : `mx-4 overflow-auto scrollbar-hide scroll-smooth flex-1 appearance-none pt-0`
+              ? `mx-4 overflow-auto no-scrollbar scroll-smooth flex-1 appearance-none pt-0 pb-30`
+              : `mx-4 overflow-auto no-scrollbar scroll-smooth flex-1 appearance-none pt-0`
           }
         >
-          <RecommendedSection />
-          <TopChartThisWeekSection />
-          <TopAlbum />
+          <CurrentComponent />
         </div>
         {currentTrack && (
           <div

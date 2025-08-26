@@ -52,7 +52,7 @@ export const SidePanelNavItems = [
     items: [
       {
         icon: IoIosSettings,
-        title: "Setting",
+        title: "Settings",
       },
       {
         icon: MdAccountCircle,
