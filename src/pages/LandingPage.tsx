@@ -45,7 +45,7 @@ const LandingPage = () => {
         className={
           currentTrack
             ? `overflow-auto no-scrollbar scroll-smooth md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0 pb-30`
-            : `md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0`
+            : `overflow-auto no-scrollbar scroll-smooth md:col-span-2 h-screen shadow-lg/40 hidden md:block p-4 sticky top-0`
         }
       >
         <SidePanel />
