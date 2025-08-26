@@ -1,5 +1,6 @@
 import ArtistCard from "../child-components/ArtistCard";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { ArtistsList } from "../data/ArtistsList";
 
 export interface Artist {
   id: number;
@@ -8,52 +9,7 @@ export interface Artist {
   genre?: string;
 }
 
-const TopAlbum = () => {
-  const ArtistsList: Artist[] = [
-    {
-      id: 1,
-      name: "Arijit Singh",
-      image: "./assets/ArjitSingh.png",
-      genre: "Bollywood",
-    },
-    {
-      id: 2,
-      name: "Taylor Swift",
-      image: "./assets/TaylorSwift.png",
-      genre: "Pop",
-    },
-    {
-      id: 3,
-      name: "The Weeknd",
-      image: "./assets/Weekend.png",
-      genre: "R&B",
-    },
-    {
-      id: 4,
-      name: "AP Dhillon",
-      image: "./assets/ApDhillon.png",
-      genre: "Punjabi",
-    },
-    {
-      id: 6,
-      name: "Billie Eilish",
-      image: "./assets/BillieEllish.png",
-      genre: "Alternative",
-    },
-    {
-      id: 7,
-      name: "Talwinder",
-      image: "./assets/Talwinder.png",
-      genre: "Punjabi Hiphop",
-    },
-    {
-      id: 7,
-      name: "Zachseabaug",
-      image: "./assets/Zachseabaug.png",
-      genre: "English Acoustic",
-    },
-  ];
-
+export const TopArtist = () => {
   return (
     <div className="overflow-hidden">
       <div className="flex flex-row items-center">
@@ -87,5 +43,3 @@ const TopAlbum = () => {
     </div>
   );
 };
-
-export default TopAlbum;

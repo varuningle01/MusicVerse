@@ -1,13 +1,13 @@
 import RecommendedSection from "../components/RecommendedSection";
 import TopChartThisWeekSection from "../components/TopChartThisWeekSection";
-import TopAlbum from "../components/TopAlbum";
+import { TopArtist } from "../components/TopArtist";
 
 export const HomePage = () => {
   return (
     <>
       <RecommendedSection />
       <TopChartThisWeekSection />
-      <TopAlbum />
+      <TopArtist />
     </>
   );
 };

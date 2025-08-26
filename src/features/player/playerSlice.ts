@@ -5,7 +5,7 @@ export type Track = {
   title: string;
   artist: string;
   album?: string;
-  url: string;
+  url?: string;
   cover?: string;
 };
 
