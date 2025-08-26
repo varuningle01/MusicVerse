@@ -8,4 +8,5 @@ export const TAB_LIST = {
   PLAYLIST: "PLAYLIST",
   SETTINGS: "SETTINGS",
   ACCOUNT: "ACCOUNT",
+  LOGOUT: "LOGOUT",
 };

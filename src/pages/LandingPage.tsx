@@ -5,21 +5,41 @@ import Avatar from "../child-components/Avatar";
 import Player from "../child-components/Player";
 import { useSelector } from "react-redux";
 import { TAB_LIST } from "../common/devConstants";
-import Home from "../pages/Home";
-import Settings from "./Settings";
+import {
+  AccountPage,
+  AlbumPage,
+  ArtistPage,
+  FavouritePage,
+  HomePage,
+  LoginPage,
+  PlaylistPage,
+  PodcastPage,
+  RecentPage,
+  SettingsPage,
+} from ".";
 
 const LandingPage = () => {
   const { currentTrack } = useSelector((state: any) => state.player);
   const { currentTab } = useSelector((state: any) => state.dashboard);
+  console.log(currentTab);
 
   const TabConfig: Record<string, React.FC> = {
-    [TAB_LIST.HOME]: Home,
-    [TAB_LIST.SETTINGS]: Settings,
+    [TAB_LIST.HOME]: HomePage,
+    [TAB_LIST.ARTIST]: ArtistPage,
+    [TAB_LIST.ALBUM]: AlbumPage,
+    [TAB_LIST.PODCAST]: PodcastPage,
+    [TAB_LIST.RECENT]: RecentPage,
+    [TAB_LIST.FAVOURITE]: FavouritePage,
+    [TAB_LIST.PLAYLIST]: PlaylistPage,
+    [TAB_LIST.SETTINGS]: SettingsPage,
+    [TAB_LIST.ACCOUNT]: AccountPage,
   };
 
   const CurrentComponent = useMemo(() => TabConfig[currentTab], [currentTab]);
 
-  return (
+  return currentTab === TAB_LIST.LOGOUT ? (
+    <LoginPage />
+  ) : (
     <div className="h-screen mx-auto grid grid-cols-1 md:grid-cols-12">
       <div
         className={

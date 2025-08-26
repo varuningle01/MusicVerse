@@ -3,7 +3,7 @@ import RecommendedSection from "../components/RecommendedSection";
 import TopChartThisWeekSection from "../components/TopChartThisWeekSection";
 import TopAlbum from "../components/TopAlbum";
 
-const Home = () => {
+export const HomePage = () => {
   return (
     <>
       <RecommendedSection />
@@ -12,5 +12,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;

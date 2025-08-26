@@ -39,7 +39,7 @@ export const SidePanelNavItems = [
       },
       {
         icon: IoHeart,
-        title: "Favorite",
+        title: "Favourite",
       },
       {
         icon: FaMusic,
